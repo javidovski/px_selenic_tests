@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>px_selenic_tests</groupId>
+	<artifactId>px_selenic_tests</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+
+	<profiles>
+		<profile>
+			<id>WindowsOSBuild</id>
+			<activation>
+				<os>
+					<name>Windows XP</name>
+					<family>Windows</family>
+					<arch>x86</arch>
+				</os>
+			</activation>
+			<properties>
+				<java.home>C:\\Program Files\\Java\\jdk-13.0.2</java.home>
+				<webdriverPath>src\\test\\resources\\chromedriver.exe</webdriverPath>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>MacOSBuild</id>
+			<activation>
+				<os>
+					<name>mac os x</name>
+					<family>mac</family>
+					<arch>x86_64</arch>
+				</os>
+			</activation>
+			<properties>
+				<java.home>/Library/Java/JavaVirtualMachines/adoptopenjdk-13.jdk/Contents/Home/</java.home>
+				<webdriverPath>src/test/resources/chromedriver</webdriverPath>
+			</properties>
+		</profile>
+	</profiles>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit-jupiter.version>5.8.2</junit-jupiter.version>
+		<java.version>13</java.version>
+	</properties>
+
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.141.59</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.8.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.ant/ant -->
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>1.10.12</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>8.2.2.jre13</version>
+		</dependency>
+
+		<!-- json-simple and hamcrest are for testrail -->
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest -->
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest</artifactId>
+			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.5.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-engine -->
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-engine</artifactId>
+			<version>1.8.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>7.5</version>
+		</dependency>
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
+				<configuration>
+					<properties>
+						<configurationParameters>
+							<!-- Turn on/off testrail reporting 
+						TestRailExtension class is specified in
+						src/test/resources/META-INF/services/org.junit.jupiter.api.extension.Extension
+						-->
+							junit.jupiter.extensions.autodetection.enabled = false
+						</configurationParameters>
+
+					</properties>
+					<includes>
+
+						<!-- 
+						
+						<include>RegActivatePXSWeb.java</include> -->
+						<include>LoginTest1.java</include>
+
+
+					</includes>
+					<excludes>
+
+						<exclude>ReportCenterTests.java</exclude>
+						<exclude>CampaignBuilderTests.java</exclude>
+						<exclude>RegActivateGuestWeb.java</exclude>
+						<exclude>EmailBuilderTests.java</exclude>
+						<exclude>WalletManagerTests.java</exclude>
+						<exclude>TestCase.java</exclude>
+						<exclude>>eClubTests.java</exclude>
+					</excludes>
+					<systemProperties>
+						<property>
+							<name>webdriver.chrome.driver</name>
+							<value>${webdriverPath}</value>
+						</property>
+					</systemProperties>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

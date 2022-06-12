@@ -1,0 +1,2 @@
+Card Number,Campaign Label,Wallet Code,Adjustment Amount,Expiration Date,Campaign Message Template Code,Send Date
+card_number_1,campaign_label_1,wallet_code_1,adjustment_amount_1,expiration_date_1,message_template_code_1,send_date_1
